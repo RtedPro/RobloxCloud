@@ -1,5 +1,3 @@
-
-
 @echo off
 set name=%random%
 echo Developer Information
