@@ -1,21 +1,37 @@
 from flask import Flask, jsonify
 import subprocess
+import time
+import psutil
+import re
 
 app = Flask(__name__)
 
 @app.route('/deploy/android/roblox', methods=['GET'])
 def deploy_android_roblox():
     try:
-        # Run if triggered
-        result = subprocess.run(['launcher.cmd'], capture_output=True, text=True, shell=True)
+        # Start vmmanager.cmd in a new CMD window
+        subprocess.Popen(['cmd.exe', '/c', 'start', '/wait', 'cmd.exe', '/c', 'launcher.cmd'], 
+                         shell=True)
         
-        # Check if any error
-        if result.returncode == 0:
-            # Send the captured output to the client
-            return jsonify(message=result.stdout.strip()), 200
-        else:
-            # Send the error output to the client
-            return jsonify(message=result.stderr.strip()), 500
+        # Wait for up to 2:05 minutes, checks every 5 seconds.
+        for _ in range(25):
+            time.sleep(5)
+            
+            # Check if finished vncserver "Roblox-%name%"
+            for proc in psutil.process_iter(['name', 'cmdline']):
+                try:
+                    if 'cmd.exe' in proc.info['name']:
+                        for arg in proc.info['cmdline']:
+                            match = re.search(r'Roblox-(\d+)', arg)
+                            if match:
+                                vncport = match.group(1)
+                                ip = '127.0.0.1'
+                                return jsonify(ip=ip, vnc_port=vncport), 200
+                except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                    pass
+
+        # If didn't appear, show a error
+        return jsonify(message="Unexpected error has accured"), 500
     except Exception as e:
         return jsonify(message=str(e)), 500
 
