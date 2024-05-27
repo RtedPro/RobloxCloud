@@ -14,5 +14,5 @@ jobs:
            Invoke-WebRequest . -OutFile RobloxCloud-1.30.exe
     
     - name: Run Installer
-      run: Set-Location: D:\
+      run: cd D:\
            msiexec /i tailscale.msi
