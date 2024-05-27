@@ -9,7 +9,7 @@ jobs:
     
     steps:
     - name: Download required files
-      run: Set-Location: D:\
+      run: cd D:\
            Invoke-WebRequest https://pkgs.tailscale.com/stable/tailscale-setup-1.66.4-amd64.msi -OutFile tailscale.msi
            Invoke-WebRequest . -OutFile RobloxCloud-1.30.exe
     
