@@ -1,0 +1,18 @@
+name: robloxcloud
+
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+    
+    steps:
+    - name: Download required files
+      run: cd D:\
+           Invoke-WebRequest https://pkgs.tailscale.com/stable/tailscale-setup-1.66.4-amd64.msi -OutFile tailscale.msi
+           Invoke-WebRequest . -OutFile RobloxCloud-1.30.exe
+    
+    - name: Run Installer
+      run: cd D:\
+           msiexec /i tailscale.msi
