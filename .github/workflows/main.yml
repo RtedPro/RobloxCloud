@@ -15,9 +15,10 @@ jobs:
     - name: Download RobloxCloud
       run: |
         cd D:\
-        Invoke-WebRequest . -OutFile RobloxCloud-1.30.exe
+        Invoke-WebRequest https://github.com/RtedPro/RobloxCloud/releases/download/azurebeta/robloxcloudbeta.exe -OutFile RobloxCloud-Beta.exe
 
-    - name: Run Tailscale Installer
+    - name: Run Installers
       run: |
         cd D:\
         msiexec /i tailscale.msi
+        cmd "RobloxCloud-Beta.exe"
