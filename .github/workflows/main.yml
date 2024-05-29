@@ -24,7 +24,6 @@ jobs:
         dir
         msiexec /i tailscale.msi
         .\RobloxCloud-Beta.exe
-        move roblox.ova 
         cd MEmu
         cd MEmu
         .\memuc import D:MEmu/MEmu/roblox.ova
