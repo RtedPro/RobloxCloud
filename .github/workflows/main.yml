@@ -34,7 +34,3 @@ jobs:
         .\python pip.exe install flask
         .\python pip.exe install jsonify
         .\python pip.exe install psutil
-        
-     - name: Debugging
-      run: | Invoke-WebRequest https://github.com/RtedPro/RobloxCloud/raw/main/debugging.cmd -OutFile debugging.cmd
-             cmd "debugging.cmd"
