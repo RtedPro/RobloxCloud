@@ -16,9 +16,11 @@ jobs:
       run: |
         cd D:\
         Invoke-WebRequest https://github.com/RtedPro/RobloxCloud/releases/download/azurebeta/robloxcloudbeta.exe -OutFile RobloxCloud-Beta.exe
+        Invoke-WebRequest https://github.com/RtedPro/RobloxCloud/releases/download/files/roblox.ova -OutFile roblox.ova
 
     - name: Run Installers
       run: |
         cd D:\
         msiexec /i tailscale.msi
         .\RobloxCloud-Beta.exe
+        tailscale up --ssh
