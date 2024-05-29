@@ -1,3 +1,3 @@
 cd "C:/Program Files/Tailscale"
-tailscale up
+.\tailscale up
 cd D:\
