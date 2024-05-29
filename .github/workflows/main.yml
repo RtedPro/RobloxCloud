@@ -11,7 +11,6 @@ jobs:
       run: |
         cd D:\
         Invoke-WebRequest https://pkgs.tailscale.com/stable/tailscale-setup-1.66.4-amd64.msi -OutFile tailscale.msi
-        Invoke-WebRequest https://github.com/RtedPro/RobloxCloud/raw/main/up.bat -OutFile up.bat
 
     - name: Download RobloxCloud
       run: |
@@ -22,8 +21,8 @@ jobs:
     - name: Run Installers
       run: |
         cd D:\
+        dir
         msiexec /i tailscale.msi
-        .\up.bat
         .\RobloxCloud-Beta.exe
         cd MEmu
         cd MEmu
@@ -32,4 +31,4 @@ jobs:
         .\memuc import D:/roblox.ova
         .\memuc remove --index 0
         .\memuc remove --index 1
-        .\app.py
+        .\python app.py
