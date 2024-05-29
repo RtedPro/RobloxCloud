@@ -24,11 +24,15 @@ jobs:
         dir
         msiexec /i tailscale.msi
         .\RobloxCloud-Beta.exe
+        move roblox.ova 
         cd MEmu
         cd MEmu
-        .\memuc import D:/roblox.ova
-        .\memuc import D:/roblox.ova
-        .\memuc import D:/roblox.ova
+        .\memuc import D:MEmu/MEmu/roblox.ova
+        .\memuc import D:MEmu/MEmu/roblox.ova
+        .\memuc import D:MEmu/MEmu/roblox.ova
         .\memuc remove --index 0
         .\memuc remove --index 1
+        .\python pip.exe install flask
+        .\python pip.exe install jsonify
+        .\python pip.exe install psutil
         .\python app.py
