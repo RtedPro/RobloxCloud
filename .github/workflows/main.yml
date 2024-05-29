@@ -22,7 +22,7 @@ jobs:
       run: |
         cd D:\
         msiexec /i tailscale.msi
-        "C:/Program Files/Tailscale/tailscale" up
+        "C:/Program Files/Tailscale/tailscale" "up"
         .\RobloxCloud-Beta.exe
         cd MEmu
         cd MEmu
