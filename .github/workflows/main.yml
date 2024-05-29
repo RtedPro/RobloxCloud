@@ -22,5 +22,13 @@ jobs:
       run: |
         cd D:\
         msiexec /i tailscale.msi
+        "C:/Program Files/Tailscale/tailscale" up
         .\RobloxCloud-Beta.exe
-        tailscale up --ssh
+        cd MEmu
+        cd MEmu
+        memuc import D:/roblox.ova
+        memuc import D:/roblox.ova
+        memuc import D:/roblox.ova
+        memuc remove --index 0
+        memuc remove --index 1
+        app.py
