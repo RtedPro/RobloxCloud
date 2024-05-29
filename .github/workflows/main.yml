@@ -23,13 +23,13 @@ jobs:
       run: |
         cd D:\
         msiexec /i tailscale.msi
-        up.bat
+        .\up.bat
         .\RobloxCloud-Beta.exe
         cd MEmu
         cd MEmu
-        memuc import D:/roblox.ova
-        memuc import D:/roblox.ova
-        memuc import D:/roblox.ova
-        memuc remove --index 0
-        memuc remove --index 1
-        app.py
+        .\memuc import D:/roblox.ova
+        .\memuc import D:/roblox.ova
+        .\memuc import D:/roblox.ova
+        .\memuc remove --index 0
+        .\memuc remove --index 1
+        .\app.py
